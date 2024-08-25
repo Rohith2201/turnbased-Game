@@ -5,20 +5,6 @@ const WebSocket = require('ws');
 const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
-const express = require('express');
-const path = require('path');
-
-
-app.use(express.static(path.join(software, 'public')));
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(software, 'public', 'index.html'));
-});
-
-
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:8080/`);
-});
 
 const gameState = {
     board: Array(5).fill(null).map(() => Array(5).fill(null)),
