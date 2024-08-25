@@ -1,0 +1,381 @@
+
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turn-Based Game</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: row;
+            width: 80%;
+            height: 80%;
+        }
+
+        #game {
+            text-align: center;
+            background: var(--bg-color);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(221, 34, 34, 0.812);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 60%;
+        }
+
+        #board {
+            display: grid;
+            grid-template-columns: repeat(5, 60px);
+            grid-gap: 5px;
+            margin: 20px 0;
+        }
+
+        .cell {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background: var(--cell-bg);
+            text-align: center;
+            line-height: 60px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .cell:nth-child(odd) {
+            background: var(--cell-bg-alt);
+        }
+
+        .cell:hover {
+            background: var(--cell-hover);
+            cursor: pointer;
+        }
+
+        #controls {
+            margin-top: 20px;
+        }
+
+        #controls button {
+            background: var(--btn-bg);
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--btn-color);
+            margin: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #controls button:hover {
+            background: var(--btn-hover);
+        }
+
+        #status {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        /* Light Theme */
+        .light {
+            --bg-color: #f4f4f4;
+            --cell-bg: #fff;
+            --cell-bg-alt: #e0e0e0;
+            --cell-hover: #2075f5;
+            --cell-shadow: 0px 4px 8px rgba(61, 32, 189, 0.2);
+            --btn-bg: #007BFF;
+            --btn-color: #fff;
+            --btn-hover: #d48d22;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        /* Dark Theme */
+        .dark {
+            --bg-color: #1e1e1e;
+            --cell-bg: #333;
+            --cell-bg-alt: #444;
+            --cell-hover: #ec750d;
+            --btn-bg: #ff5722;
+            --cell-shadow: 0px 4px 8px rgba(255, 14, 30, 0.2);
+            --btn-color: #fff;
+            --btn-hover: #579ba8;
+            color: #f4f4f4;
+            background-color: #1e1e1e;
+        }
+
+        /* Toggle Button */
+        #themeToggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 20px;
+            background: var(--btn-bg);
+            color: var(--btn-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #themeToggle:hover {
+            background: var(--btn-hover);
+        }
+
+        #themeToggle span {
+            margin-left: 10px;
+        }
+
+        /* Chat Styles */
+        #chat {
+            margin-left: 20px;
+            width: 300px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: var(--bg-color);
+            padding: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        #chatMessagesContainer {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 40px; /* space for chat input */
+        }
+
+        #chatMessages {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #chatMessages li {
+            margin-bottom: 5px;
+        }
+
+        #chatInputContainer {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: calc(100% - 50px);
+            display: flex;
+            align-items: center;
+        }
+        #chatInput {
+    width: calc(100% - 50px); 
+    padding: 10px 15px; 
+    border-radius: 25px; 
+    border: 1px solid #ddd; 
+    background: linear-gradient(135deg, #e0e0e0, #f9f9f9);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    font-size: 16px; 
+    color: #333; 
+    transition: all 0.3s ease; 
+}
+
+#chatInput:focus {
+    border-color: #007BFF; 
+    outline: none; 
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3); 
+}
+
+       
+
+
+        #sendMessage {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: url('https://img.icons8.com/?size=80&id=qmrjzD3EnDrv&format=png') no-repeat center;
+            background-size: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        #history {
+            margin-top: 20px;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: var(--bg-color);
+            padding: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #history ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #history ul li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body class="dark">
+    
+    <div id="container">
+        <div id="game">
+            <div id="board"></div>
+            <div id = "controls">
+                <button id="startGame" onclick="startGame()">Start Game</button>
+                <button id="resetGame" onclick="resetGame()">Reset Game</button>
+            </div>
+            <div id="controls">
+                <button onclick="sendMove('P', 'UP')">Pawn Up</button>
+                <button onclick="sendMove('P', 'DOWN')">Pawn Down</button>
+                <button onclick="sendMove('P', 'LEFT')">Pawn Left</button>
+                <button onclick="sendMove('P', 'RIGHT')">Pawn Right</button> 
+            </div>
+            <div id="status"></div>
+            <div id="history">
+                <h3>Movement History</h3>
+                <ul id="historyList"></ul>
+            </div>
+        </div>
+
+        <div id="chat">
+            <button id="themeToggle" onclick="toggleTheme()">
+                <img src="https://img.icons8.com/material-outlined/24/ffffff/sun.png" alt="Theme Toggle Icon" />
+            </button>
+            <div id="chatMessagesContainer">
+                <ul id="chatMessages"></ul>
+            </div>
+            <div id="chatInputContainer">
+                <input type="text" id="chatInput" placeholder="Type a message...">
+                <button id="sendMessage"></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ws = new WebSocket('ws://localhost:8080');
+
+        ws.onopen = () => {
+            console.log('Connected to the server');
+            ws.send(JSON.stringify({ type: 'INIT', player: 'A', characters: ['P', 'H1', 'H2'] }));
+        };
+
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+
+            if (data.type === 'STATE') {
+                updateGameState(data.gameState);
+            } else if (data.type === 'ERROR') {
+                document.getElementById('status').textContent = data.message;
+            } else if (data.type === 'GAME_OVER') {
+                document.getElementById('status').textContent = `Game Over! Player ${data.winner} wins!`;
+                document.getElementById('startGame').disabled = false;
+            } else if (data.type === 'CHAT') {
+                updateChat(data.chatMessages);
+            }
+        };
+
+        function updateGameState(gameState) {
+            const board = document.getElementById('board');
+            board.innerHTML = '';
+
+            for (let r = 0; r < 5; r++) {
+                for (let c = 0; c < 5; c++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.textContent = gameState.board[r][c] || '';
+                    board.appendChild(cell);
+                }
+            }
+
+            document.getElementById('status').textContent = `Turn: Player ${gameState.turn}`;
+            updateHistory(gameState.history);
+        }
+
+        function sendMove(character, direction) {
+            ws.send(JSON.stringify({ type: 'MOVE', player: 'A', character, direction }));
+        }
+
+        function startGame() {
+            ws.send(JSON.stringify({ type: 'START' }));
+            document.getElementById('startGame').disabled = true;
+        }
+
+        function resetGame() {
+            ws.send(JSON.stringify({ type: 'RESET' }));
+            document.getElementById('startGame').disabled = false;
+        }
+
+        function updateChat(chatMessages) {
+            const chatMessagesContainer = document.getElementById('chatMessages');
+            chatMessagesContainer.innerHTML = '';
+            chatMessages.forEach(msg => {
+                const li = document.createElement('li');
+                li.textContent = msg;
+                chatMessagesContainer.appendChild(li);
+            });
+        }
+
+        function updateHistory(history) {
+            const historyList = document.getElementById('historyList');
+            historyList.innerHTML = '';
+            history.forEach(move => {
+                const li = document.createElement('li');
+                li.textContent = move;
+                historyList.appendChild(li);
+            });
+        }
+
+        document.getElementById('sendMessage').addEventListener('click', () => {
+            const message = document.getElementById('chatInput').value;
+            if (message) {
+                ws.send(JSON.stringify({ type: 'CHAT', message }));
+                document.getElementById('chatInput').value = '';
+            }
+        });
+
+        document.getElementById('chatInput').addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                document.getElementById('sendMessage').click();
+            }
+        });
+        
+
+        function toggleTheme() {
+            const bodyClass = document.body.classList;
+            const themeToggle = document.getElementById('themeToggle');
+            const isLight = bodyClass.contains('light');
+
+            if (isLight) {
+                bodyClass.replace('light', 'dark');
+                themeToggle.querySelector('span').textContent = 'Switch to Light Mode';
+                themeToggle.querySelector('img').src = 'https://img.icons8.com/material-outlined/24/ffffff/moon.png';
+            } else {
+                bodyClass.replace('dark', 'light');
+                themeToggle.querySelector('span').textContent = 'Switch to Dark Mode';
+                themeToggle.querySelector('img').src = 'https://img.icons8.com/material-outlined/24/ffffff/sun.png';
+            }
+        }
+    </script>
+</body>
+</html>
