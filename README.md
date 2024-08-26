@@ -29,12 +29,14 @@ Follow these steps to get the project up and running on your local machine:
 
 - [Node.js](https://nodejs.org/) installed on your machine.
 - A modern web browser.
+
+Project deployed at : https://turnbasedgame-git-main-rohith-portfolio.vercel.app/
 ```
 ### Downloading the Project
 
 1. Clone the repository to your local machine:
    ```bash
-   git clone https://github.com/yourusername/hitwicket-assignment.git
+   git clone https://github.com/Rohith2201/JVLSROHITH_21BCE7494
    ```
 
 2. Navigate to the project directory:
