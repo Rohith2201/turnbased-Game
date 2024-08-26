@@ -1,5 +1,4 @@
-# TurnBasedGame
-Here’s a `README.md` template you can use for your project:
+# TurnBasedGame `README.md` 
 
 ```markdown
 # Hitwicket Assignment - Turn-Based Chess-Like Game
@@ -30,7 +29,7 @@ Follow these steps to get the project up and running on your local machine:
 
 - [Node.js](https://nodejs.org/) installed on your machine.
 - A modern web browser.
-
+```
 ### Downloading the Project
 
 1. Clone the repository to your local machine:
