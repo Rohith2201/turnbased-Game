@@ -99,6 +99,14 @@ If you encounter an `EADDRINUSE` error (address already in use), it means port `
 - **public/** - Contains the static assets including `index.html`, styles, and client-side JavaScript.
 - **server.js** - The main server file handling HTTP requests and WebSocket communication.
 
+## Bonus challanges
+- [ ] **Hero3**: Added a new character type with complex movement patterns.
+- [ ] **Dynamic Team Composition**: Players can choose their team composition at the start of each game.
+- [ ] **Spectator Mode**: Implemented for observing ongoing games.
+- [x] **Chat Feature**: Added for player communication.
+- [ ] **AI Opponent**: Implemented a basic AI for single-player mode.
+- [ ] **Replay System**: Allows players to review past games.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
