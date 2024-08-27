@@ -29,9 +29,12 @@ Follow these steps to get the project up and running on your local machine:
 
 - [Node.js](https://nodejs.org/) installed on your machine.
 - A modern web browser.
-
-Project deployed at : https://turnbasedgame-git-main-rohith-portfolio.vercel.app/
 ```
+Project deployed at :
+```
+https://turnbasedgame-git-main-rohith-portfolio.vercel.app/
+```
+
 ### Downloading the Project
 
 1. Clone the repository to your local machine:
