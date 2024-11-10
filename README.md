@@ -1,12 +1,12 @@
 # TurnBasedGame `README.md` 
 
-```markdown
-# Hitwicket Assignment - Turn-Based Chess-Like Game
+
 
 This project is a turn-based chess-like game with a server-client architecture, utilizing WebSockets for real-time communication and a web-based user interface. The game features a 5x5 grid and three types of characters (Pawn, Hero1, Hero2), each with specific movement and combat rules.
 
-## Features
 
+## Features
+```
 - 5x5 Grid: A compact game board for strategic play.
 - Three Character Types: 
   - Pawn:Basic movement and attack capabilities.
@@ -14,12 +14,18 @@ This project is a turn-based chess-like game with a server-client architecture, 
   - Hero2: Special abilities with strategic advantages.
   - Real-Time Communication:Implemented using WebSockets for smooth interaction between players.
   - Web-Based Interface:Accessible via any modern web browser.
-
+```
 ## Bonus Features
-
+```
 - Hero3 Implementation: Additional character with unique abilities.
 - Dynamic Team Composition: Flexibility in selecting team members.
 - Dark and Light Mode: Toggle between light and dark modes for better user experience.
+```
+
+## 👨‍💻 The Stack
+<div align="center">
+<img src= "https://tech-orbit.wontory.dev/api?title=FetchReach&tech=Python,Git,TensorFlow,Google%20Colab&size=500&duration=20" width="500">
+</div>
 
 ## Installation and Setup
 
@@ -36,7 +42,7 @@ https://turnbasedgame-git-main-rohith-portfolio.vercel.app/
 ```
 
 ### Downloading the Project
-
+```
 1. Clone the repository to your local machine:
    ```bash
    git clone https://github.com/Rohith2201/JVLSROHITH_21BCE7494
