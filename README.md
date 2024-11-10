@@ -24,7 +24,7 @@ This project is a turn-based chess-like game with a server-client architecture, 
 
 ## 👨‍💻 The Stack
 <div align="center">
-<img src= "https://tech-orbit.wontory.dev/api?title=FetchReach&tech=Python,Git,TensorFlow,Google%20Colab&size=500&duration=20" width="500">
+<img src= "https://tech-orbit.wontory.dev/api?title=TurnBased%20Game&tech=HTML5,JSON,Node.js,npm,Git,Vercel,Docker&size=800&duration=25">
 </div>
 
 ## Installation and Setup
